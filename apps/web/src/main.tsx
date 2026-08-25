@@ -9,6 +9,7 @@ import { MemberDashboard } from "./features/member/dashboard";
 import { CaregiverDashboard } from "./features/caregiver/dashboard";
 import {AdminDashboard } from "./features/admin/dashboard";
 import LoginPage from "./features/auth/LoginPage";
+import { Profile } from "./features/member/profile";
 
 const Placeholder = () => {
   return (
@@ -36,6 +37,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
           {/* <Route path="dashboard" element={<DashboardPage />} /> */}
+
+          <Route path="profile" element={<Profile />} />
           <Route path="dashboard/member" element={<MemberDashboard />} />
           <Route path="dashboard/caregiver" element={<CaregiverDashboard />} />
           <Route path="dashboard/admin" element={<AdminDashboard />} />

@@ -1,7 +1,7 @@
-import { appDataSource } from '../../../database/data-source.js';
-import { AppError } from '../../../lib/errors.js';
-import { User } from '../../identity/user.entity.js';
-import { PersonalInfo } from './personal-info.entity.js';
+import { appDataSource } from "../../../database/data-source.js";
+import { AppError } from "../../../lib/errors.js";
+import { User } from "../../identity/user.entity.js";
+import { PersonalInfo } from "./personal-info.entity.js";
 
 type PersonalInfoInput = {
   firstName: string;
@@ -16,6 +16,13 @@ type PersonalInfoInput = {
   state?: string | null;
   postalCode?: string | null;
   country?: string | null;
+  disabilityType?: string | null;
+  mobilityLevel?: string | null;
+  wheelchairUser?: boolean | null;
+  fatigueTrigger?: string | null;
+  medicationRoutine?: string | null;
+  workStudySchedule?: string | null;
+  accessibilityNeeds?: string | null;
 };
 
 export const getPersonalInfo = async (userId: string) => {
@@ -32,18 +39,22 @@ export const createPersonalInfo = async (
   const personalInfoRepo = appDataSource.getRepository(PersonalInfo);
 
   const user = await userRepo.findOne({ where: { id: userId } });
-  if (!user) throw new AppError(404, 'User not found');
+  if (!user) throw new AppError(404, "User not found");
 
   const existingInfo = await personalInfoRepo.findOne({ where: { userId } });
-  if (existingInfo) throw new AppError(409, 'Personal info already exists');
+  if (existingInfo) throw new AppError(409, "Personal info already exists");
 
-  const personalInfo = personalInfoRepo.create({
-    ...input,
-    userId,
-    user,
-  });
-
-  return personalInfoRepo.save(personalInfo);
+  try {
+    const personalInfo = personalInfoRepo.create({
+      ...input,
+      userId,
+      user,
+    });
+    return personalInfoRepo.save(personalInfo);
+  } catch (error) {
+    console.error(error);
+    throw new AppError(500, "Failed to create personal info");
+  }
 };
 
 export const updatePersonalInfo = async (
@@ -53,7 +64,7 @@ export const updatePersonalInfo = async (
   const personalInfoRepo = appDataSource.getRepository(PersonalInfo);
 
   const personalInfo = await personalInfoRepo.findOne({ where: { userId } });
-  if (!personalInfo) throw new AppError(404, 'Personal info not found');
+  if (!personalInfo) throw new AppError(404, "Personal info not found");
 
   personalInfoRepo.merge(personalInfo, input);
 

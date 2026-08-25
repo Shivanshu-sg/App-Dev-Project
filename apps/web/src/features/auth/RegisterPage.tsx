@@ -41,7 +41,11 @@ export function RegisterPage() {
         return;
       }
 
-      navigate(getDashboardPath(user.role), { replace: true });
+      if (user.role === "member"){
+        navigate("/profile", { replace: true });
+      }else{
+        navigate(getDashboardPath(user.role), { replace: true });
+      }
     }
 
     catch (err) {
