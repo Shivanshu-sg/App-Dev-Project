@@ -10,5 +10,8 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck"
   },
-  "devDependencies": { "typescript": "^5.7.3" }
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^5.7.3"
+  }
 }

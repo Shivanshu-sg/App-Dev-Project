@@ -3,11 +3,12 @@ import { z } from 'zod';
 import { login, register } from './auth.service.js';
 
 const credentials = z.object({ email: z.string().email(), password: z.string().min(12).max(128) });
+const registration = credentials.extend({ role: z.enum(['member', 'caregiver', 'admin']).default('member') });
 export const authRouter = Router();
 authRouter.post('/register', async (req, res, next) => {
   try {
-    const { email, password } = credentials.parse(req.body);
-    res.status(201).json({ data: await register(email, password) });
+    const { email, password, role } = registration.parse(req.body);
+    res.status(201).json({ data: await register(email, password, role) });
   } catch (error) { next(error); }
 });
 
