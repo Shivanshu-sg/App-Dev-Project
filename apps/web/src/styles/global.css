@@ -247,3 +247,1036 @@ header {
     grid-column: 1 / -1;
   }
 }
+.care-plans-page {
+  max-width: 1000px;
+}
+
+.care-plans-header {
+  margin-bottom: 1.5rem;
+}
+
+.care-plans-header p {
+  color: #52645a;
+}
+
+.care-plan-form {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+  margin-bottom: 2rem;
+}
+
+.care-plan-form h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+
+.care-plan-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.care-plan-form input,
+.care-plan-form textarea,
+.care-plan-form select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.care-plan-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.care-plan-form input:focus,
+.care-plan-form textarea:focus,
+.care-plan-form select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.form-actions button,
+.card-actions button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-actions button:hover,
+.card-actions button:hover {
+  background: #164b30;
+}
+
+.form-actions button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.secondary-button {
+  background: #eaf3ee !important;
+  color: #1c5d3b !important;
+}
+
+.secondary-button:hover {
+  background: #dce8df !important;
+}
+
+.care-plan-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.care-plan-list h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.care-plan-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.care-plan-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.care-plan-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.care-plan-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.care-plan-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.care-plan-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.care-plan-card dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.danger-button {
+  background: #b42318 !important;
+}
+
+.danger-button:hover {
+  background: #8f1c12 !important;
+}
+
+@media (min-width: 760px) {
+  .care-plan-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .care-plan-form h2 {
+    grid-column: 1 / -1;
+  }
+
+  .care-plan-card {
+    grid-template-columns: 1.4fr 1fr auto;
+    align-items: start;
+  }
+
+  .care-plan-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.care-plan-details-page {
+  max-width: 1000px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #1c5d3b;
+  font-weight: 600;
+}
+
+.care-plan-detail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.care-plan-detail-header h1 {
+  margin-bottom: 0.4rem;
+}
+
+.care-plan-detail-header p {
+  margin: 0;
+  color: #52645a;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-active {
+  background: #eaf3ee;
+  color: #1c5d3b;
+}
+
+.status-paused {
+  background: #fff4df;
+  color: #8a5a00;
+}
+
+.status-completed {
+  background: #e8f0ff;
+  color: #214f9a;
+}
+
+.care-plan-detail-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.care-plan-detail-grid article {
+  border: 1px solid #dce8df;
+}
+
+.care-plan-detail-grid span {
+  display: block;
+  color: #52645a;
+  font-size: 0.9rem;
+}
+
+.care-plan-detail-grid strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+}
+
+.task-form {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+  margin-bottom: 2rem;
+}
+
+.task-form h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+
+.task-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.task-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.task-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.task-list h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.task-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.task-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.task-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.task-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.task-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.task-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.task-card dd {
+  margin: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+@media (min-width: 760px) {
+  .care-plan-detail-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .task-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .task-form h2 {
+    grid-column: 1 / -1;
+  }
+
+  .task-card {
+    grid-template-columns: 1.2fr 1.4fr auto;
+    align-items: start;
+  }
+
+  .task-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.task-list-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.task-list-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.task-list-header p {
+  margin: 0.25rem 0 0;
+  color: #52645a;
+}
+
+.task-list-header button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.task-list-header button:hover {
+  background: #164b30;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(22, 34, 29, 0.55);
+}
+
+.task-modal {
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dce8df;
+  box-shadow: 0 16px 40px rgba(22, 34, 29, 0.22);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #dce8df;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close-button {
+  border: 0;
+  background: transparent;
+  color: #1c5d3b;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-close-button:hover {
+  text-decoration: underline;
+}
+
+.task-modal .task-form {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.care-plans-page {
+  max-width: 1000px;
+}
+
+.care-plans-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.care-plans-header h1 {
+  margin: 0;
+}
+
+.care-plans-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.care-plans-header button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.care-plans-header button:hover {
+  background: #164b30;
+}
+
+.care-plan-form {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.care-plan-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.care-plan-form input,
+.care-plan-form textarea,
+.care-plan-form select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.care-plan-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.care-plan-form input:focus,
+.care-plan-form textarea:focus,
+.care-plan-form select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.form-actions button,
+.card-actions button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-actions button:hover,
+.card-actions button:hover {
+  background: #164b30;
+}
+
+.form-actions button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.secondary-button {
+  background: #eaf3ee !important;
+  color: #1c5d3b !important;
+}
+
+.secondary-button:hover {
+  background: #dce8df !important;
+}
+
+.care-plan-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.care-plan-list h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.care-plan-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.care-plan-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.care-plan-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.care-plan-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.care-plan-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.care-plan-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.care-plan-card dd {
+  margin: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.card-actions a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #eaf3ee;
+  color: #1c5d3b;
+  font-weight: 700;
+}
+
+.card-actions a:hover {
+  background: #dce8df;
+}
+
+.danger-button {
+  background: #b42318 !important;
+}
+
+.danger-button:hover {
+  background: #8f1c12 !important;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(22, 34, 29, 0.55);
+}
+
+.task-modal {
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dce8df;
+  box-shadow: 0 16px 40px rgba(22, 34, 29, 0.22);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #dce8df;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close-button {
+  border: 0;
+  background: transparent;
+  color: #1c5d3b;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-close-button:hover {
+  text-decoration: underline;
+}
+
+.task-modal .care-plan-form {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 760px) {
+  .care-plan-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .care-plan-card {
+    grid-template-columns: 1.4fr 1fr auto;
+    align-items: start;
+  }
+
+  .care-plan-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.check-ins-page {
+  max-width: 1000px;
+}
+
+.check-ins-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.check-ins-header h1 {
+  margin: 0;
+}
+
+.check-ins-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.check-ins-header button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.check-ins-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.check-ins-list h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.check-in-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.check-in-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.check-in-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.check-in-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.check-in-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.check-in-card dd {
+  margin: 0;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.check-in-modal {
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #dce8df;
+  box-shadow: 0 16px 40px rgba(22, 34, 29, 0.22);
+}
+
+.check-in-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.check-in-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.check-in-form input,
+.check-in-form textarea,
+.check-in-form select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.check-in-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.check-in-form input:focus,
+.check-in-form textarea:focus,
+.check-in-form select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+@media (min-width: 760px) {
+  .check-in-card {
+    grid-template-columns: 1.1fr 1.5fr auto;
+    align-items: start;
+  }
+
+  .check-in-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .check-in-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.member-dashboard {
+  max-width: 900px;
+}
+
+.dashboard-topbar,
+.dashboard-summary,
+.today-care-plan,
+.dashboard-tabs {
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.dashboard-topbar h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.dashboard-topbar p {
+  margin: 0.5rem 0 0;
+  color: #52645a;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  align-items: center;
+  color: #52645a;
+}
+
+.dashboard-actions a {
+  font-weight: 700;
+}
+
+.dashboard-summary {
+  margin-bottom: 1rem;
+}
+
+.dashboard-summary p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.dashboard-summary strong {
+  display: inline;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.wellbeing-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wellbeing-row label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 600;
+}
+
+.wellbeing-row select {
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.today-care-plan {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.today-care-plan h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.today-care-plan > p {
+  margin: 0;
+  color: #52645a;
+}
+
+.today-task {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  border: 1px solid #e7eee9;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: #fbfdfb;
+}
+
+.today-task span:first-child {
+  color: #1c5d3b;
+  font-weight: 700;
+}
+
+.today-task span:last-child {
+  color: #52645a;
+  white-space: nowrap;
+}
+
+.progress-line {
+  margin-top: 0.5rem !important;
+  font-weight: 700;
+  color: #16221d !important;
+}
+
+.dashboard-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dashboard-tabs a {
+  border-radius: 6px;
+  padding: 0.65rem 0.8rem;
+  background: #eaf3ee;
+  color: #1c5d3b;
+  font-weight: 700;
+}
+
+.dashboard-tabs a:hover {
+  background: #dce8df;
+}
+
+@media (max-width: 640px) {
+  .dashboard-topbar {
+    display: grid;
+  }
+
+  .dashboard-actions {
+    justify-content: flex-start;
+  }
+
+  .today-task {
+    grid-template-columns: auto 1fr;
+  }
+
+  .today-task span:last-child {
+    grid-column: 2;
+  }
+}

@@ -10,6 +10,9 @@ import { CaregiverDashboard } from "./features/caregiver/dashboard";
 import {AdminDashboard } from "./features/admin/dashboard";
 import LoginPage from "./features/auth/LoginPage";
 import { Profile } from "./features/member/profile";
+import { CarePlans } from "./features/member/carePlans";
+import { CarePlanDetails } from "./features/member/carePlanDetails";
+import { CheckIns } from "./features/member/checkIns";
 
 const Placeholder = () => {
   return (
@@ -40,10 +43,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
           <Route path="profile" element={<Profile />} />
           <Route path="dashboard/member" element={<MemberDashboard />} />
+          <Route path="care-plans" element={<CarePlans />} />
+          <Route path="care-plans/:carePlanId" element={<CarePlanDetails />} />
+          <Route path="check-ins" element={<CheckIns />} />
+
+
           <Route path="dashboard/caregiver" element={<CaregiverDashboard />} />
           <Route path="dashboard/admin" element={<AdminDashboard />} />
-          <Route path="care-plans" element={<Placeholder />} />
-          <Route path="check-ins" element={<Placeholder />} />
+
           <Route path="goals" element={<Placeholder />} />
           <Route path="assistant" element={<Placeholder />} />
         </Route>

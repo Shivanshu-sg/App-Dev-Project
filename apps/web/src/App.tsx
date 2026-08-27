@@ -31,7 +31,6 @@ export function App() {
             <div className="nav-links">
               {user.role === "member" && (
                 <>
-                  <NavLink to= "/profile">Profile</NavLink>
                   <NavLink to="/dashboard/member">Dashboard</NavLink>
                   <NavLink to="/care-plans">Care plans</NavLink>
                   <NavLink to="/check-ins">Check-in</NavLink>
