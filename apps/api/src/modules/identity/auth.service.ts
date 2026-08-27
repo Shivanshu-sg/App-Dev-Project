@@ -9,12 +9,15 @@ export const register = async (
   email: string,
   password: string,
   role: Role = "member",
+  name?: string,
+  occupation?: string,
+  phoneNumber?: string
 ) => {
   const repo = appDataSource.getRepository(User);
   if (await repo.existsBy({ email }))
     throw new AppError(409, "Email is already registered");
   const user = await repo.save(
-    repo.create({ email, passwordHash: await bcrypt.hash(password, 12), role }),
+    repo.create({ email, passwordHash: await bcrypt.hash(password, 12), role, name, phoneNumber, occupation }),
   );
   return {
     user: { id: user.id, email: user.email, role: user.role },

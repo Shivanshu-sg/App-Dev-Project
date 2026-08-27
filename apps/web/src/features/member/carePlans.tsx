@@ -33,6 +33,7 @@ type CarePlanForm = {
   startDate: string;
   endDate: string;
   status: CarePlanStatus;
+  caregiverId?: string;
 };
 
 const emptyCarePlan: CarePlanForm = {
@@ -42,6 +43,17 @@ const emptyCarePlan: CarePlanForm = {
   startDate: "",
   endDate: "",
   status: "active",
+  caregiverId: "",
+};
+
+type Caregiver = {
+  id: string;
+  name: string;
+  Occupation: string;
+};
+
+type CaregiversResponse = {
+  data: Caregiver[];
 };
 
 export function CarePlans() {
@@ -53,6 +65,7 @@ export function CarePlans() {
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [caregivers, setCaregivers] = useState<Caregiver[]>([]);
 
   async function loadCarePlans() {
     setIsLoading(true);
@@ -62,14 +75,28 @@ export function CarePlans() {
       const result = await api<CarePlansResponse>("/member/care-plans");
       setCarePlans(result.data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load care plans");
+      setError(
+        err instanceof Error ? err.message : "Could not load care plans",
+      );
     } finally {
       setIsLoading(false);
     }
   }
 
+  async function loadCaregivers() {
+    try {
+      const result = await api<CaregiversResponse>("/caregiver");
+      setCaregivers(result.data);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Could not load caregivers",
+      );
+    }
+  }
+
   useEffect(() => {
     loadCarePlans();
+    loadCaregivers();
   }, []);
 
   function updateField<K extends keyof CarePlanForm>(
@@ -131,7 +158,9 @@ export function CarePlans() {
 
       setMessage("Care plan deleted.");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not delete care plan");
+      setError(
+        err instanceof Error ? err.message : "Could not delete care plan",
+      );
     }
   }
 
@@ -288,6 +317,26 @@ export function CarePlans() {
                   }
                   maxLength={150}
                 />
+              </label>
+
+              <label>
+                Caregiver
+                <select
+                  value={form.caregiverId}
+                  onChange={(event) =>
+                    updateField("caregiverId", event.target.value)
+                  }
+                  required
+                >
+                  <option value="">Select a caregiver</option>
+
+                  {caregivers.map((caregiver) => (
+                    <option key={caregiver.id} value={caregiver.id}>
+                      {caregiver.name? caregiver.name : "Test" }
+                      {caregiver.Occupation ? ` (${caregiver.Occupation})` : ""}
+                    </option>
+                  ))}
+                </select>
               </label>
 
               <label>

@@ -23,6 +23,9 @@ export function getDashboardPath(role: Role) {
 export function RegisterPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<Role>("member");
   const [error, setError] = useState("");
@@ -34,21 +37,19 @@ export function RegisterPage() {
     setIsSubmitting(true);
 
     try {
-      const user = await registerUser(email, password, role);
+      const user = await registerUser(email, password, role, name, occupation, mobileNumber);
 
       if (!user) {
         setError("Registration failed");
         return;
       }
 
-      if (user.role === "member"){
+      if (user.role === "member") {
         navigate("/profile", { replace: true });
-      }else{
+      } else {
         navigate(getDashboardPath(user.role), { replace: true });
       }
-    }
-
-    catch (err) {
+    } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed");
     } finally {
       setIsSubmitting(false);
@@ -72,6 +73,45 @@ export function RegisterPage() {
               autoComplete="email"
             />
           </label>
+
+          {role === "caregiver" && (
+            <label>
+              Name
+              <input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                required
+                autoComplete="name"
+              />
+            </label>
+          )}
+
+          {role === "caregiver" && (
+            <label>
+              Occupation
+              <input
+                type="text"
+                value={occupation}
+                onChange={(event) => setOccupation(event.target.value)}
+                required
+                autoComplete="occupation"
+              />
+            </label>
+          )}
+
+          {role === "caregiver" && (
+            <label>
+              Mobile Number
+              <input
+                type="telephone"
+                value={mobileNumber}
+                onChange={(event) => setMobileNumber(event.target.value)}
+                required
+                autoComplete="telephone"
+              />
+            </label>
+          )}
 
           <label>
             Password

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { authenticate } from '../../../middleware/authorize.js';
 import {
   createCarePlan,
+  createCarePlanAssignment,
   deleteCarePlan,
   getCarePlanById,
   getCarePlans,
@@ -23,6 +24,7 @@ const carePlanSchema = z.object({
   startDate: z.string().min(1),
   endDate: z.preprocess(emptyStringToNull, z.string().optional().nullable()),
   status: z.enum(['active', 'paused', 'completed']).default('active'),
+  caregiverId: z.string(),
 });
 
 const updateCarePlanSchema = carePlanSchema.partial();
@@ -61,6 +63,12 @@ carePlanRouter.post('/', async (req, res, next) => {
 
     const input = carePlanSchema.parse(req.body);
     const carePlan = await createCarePlan(req.user.sub, req.user.sub, input);
+    const carePlanAssignment = await createCarePlanAssignment(
+      req.user.sub,
+      input.caregiverId,
+      req.user.sub,
+      carePlan.id,
+    );
 
     res.status(201).json({ data: carePlan });
   } catch (error) {

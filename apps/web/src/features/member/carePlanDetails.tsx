@@ -7,6 +7,17 @@ type TaskType = "exercise" | "routine" | "therapy" | "selfcare" | "other";
 type TaskPriority = "low" | "med" | "high";
 type TaskStatus = "pending" | "done" | "missed" | "skipped";
 
+type Caregiver = {
+  id: string;
+  name: string;
+};
+
+type CaregiverAssignment = {
+  id: string;
+  caregiverId: string;
+  caregiver: Caregiver;
+};
+
 type CarePlan = {
   id: string;
   title: string;
@@ -15,6 +26,7 @@ type CarePlan = {
   startDate: string;
   endDate: string | null;
   status: CarePlanStatus;
+  caregiverAssignments: CaregiverAssignment[];
 };
 
 type CarePlanTask = {
@@ -251,6 +263,20 @@ export function CarePlanDetails() {
           <strong>{carePlan.conditionFocus || "Not set"}</strong>
         </article>
 
+
+        <article>
+          <span>Caregiver</span>
+
+          <strong>
+            {carePlan.caregiverAssignments?.length > 0
+              ? carePlan.caregiverAssignments
+                  .map((assignment) => assignment.caregiver?.name)
+                  .filter(Boolean)
+                  .join(", ")
+              : "No caregiver assigned"}
+          </strong>
+        </article>
+
         <article>
           <span>Start date</span>
           <strong>{carePlan.startDate}</strong>
@@ -268,7 +294,11 @@ export function CarePlanDetails() {
           <p>Manage the tasks connected to this care plan.</p>
         </div>
 
-        <button type="button" className="card-actions" onClick={openAddTaskPopup}>
+        <button
+          type="button"
+          className="card-actions"
+          onClick={openAddTaskPopup}
+        >
           Add task
         </button>
       </section>

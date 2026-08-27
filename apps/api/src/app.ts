@@ -8,6 +8,7 @@ import { personalInfoRouter } from './modules/member/personal-info/personal-info
 import { carePlanRouter } from './modules/member/care-plans/care-plans.routes.js';
 import { carePlanTaskRouter } from './modules/member/care-plan-tasks/care_plan_tasks.routes.js';
 import { checkInRouter } from './modules/member/check-ins/check_in.route.js';
+import CareGiverRouter from './modules/caregiver/caregiver.routes.js';
 
 export const app = express();
 app.use(cors({ origin: env.WEB_ORIGIN }));
@@ -19,4 +20,6 @@ app.use('/api/v1/member/profile', personalInfoRouter);
 app.use('/api/v1/member/care-plans', carePlanRouter);
 app.use('/api/v1/member/care-plans-tasks', carePlanTaskRouter);
 app.use('/api/v1/member/check-ins', checkInRouter);
+
+app.use('/api/v1/caregiver', CareGiverRouter);
 app.use(errorHandler);

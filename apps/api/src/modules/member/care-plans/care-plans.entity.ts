@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../identity/user.entity.js';
+import { CaregiverAssignment } from './care-giver-assignment.entity.js';
 
 export type CarePlanStatus = 'active' | 'paused' | 'completed';
 
@@ -20,6 +22,7 @@ export class CarePlan {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
+
   @Column({ name: 'user_id', type: 'uuid' })
   userId!: string;
 
@@ -31,6 +34,12 @@ export class CarePlan {
 
   @Column({ name: 'condition_focus', type: 'varchar', length: 150, nullable: true })
   conditionFocus!: string | null;
+
+  @OneToMany(
+  () => CaregiverAssignment,
+  (caregiverAssignment) => caregiverAssignment.carePlan,
+)
+caregiverAssignments!: CaregiverAssignment[];
 
   @Column({ name: 'start_date', type: 'date' })
   startDate!: string;

@@ -34,6 +34,9 @@ export const getCarePlanTasks = async (userId: string, carePlanId: string) => {
 
     return appDataSource.getRepository(CarePlanTask).find({
       where: { carePlanId },
+      relations: {
+        carePlan: true,
+      },
       order: { createdAt: "DESC" },
     });
   } catch (error) {

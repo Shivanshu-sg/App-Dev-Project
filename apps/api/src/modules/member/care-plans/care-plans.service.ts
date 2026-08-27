@@ -1,6 +1,7 @@
 import { appDataSource } from '../../../database/data-source.js';
 import { AppError } from '../../../lib/errors.js';
 import { User } from '../../identity/user.entity.js';
+import { CaregiverAssignment, CaregiverAssignmentStatus } from './care-giver-assignment.entity.js';
 import { CarePlan, CarePlanStatus } from './care-plans.entity.js';
 
 type CarePlanInput = {
@@ -22,11 +23,43 @@ export const getCarePlans = async (userId: string) => {
 export const getCarePlanById = async (userId: string, carePlanId: string) => {
   const carePlan = await appDataSource.getRepository(CarePlan).findOne({
     where: { id: carePlanId, userId },
+    relations: {
+      caregiverAssignments: {
+        caregiver: true,
+      }
+    },
   });
 
   if (!carePlan) throw new AppError(404, 'Care plan not found');
 
   return carePlan;
+};
+
+export const createCarePlanAssignment = async (userId: string, caregiverId: string, assignedById: string, carePlanId: string | null) => {
+  const userRepo = appDataSource.getRepository(User);
+  const carePlanAssignmentRepo = appDataSource.getRepository(CaregiverAssignment);
+
+  const user = await userRepo.findOne({ where: { id: userId } });
+  if (!user) throw new AppError(404, 'User not found');
+
+  const caregiver = await userRepo.findOne({ where: { id: caregiverId } });
+  if (!caregiver) throw new AppError(404, 'Caregiver not found');
+
+  const assignedBy = await userRepo.findOne({ where: { id: assignedById } });
+  if (!assignedBy) throw new AppError(404, 'Assigned by not found');
+
+  const carePlanAssignment = carePlanAssignmentRepo.create({
+    userId,
+    user,
+    caregiverId,
+    caregiver,
+    assignedBy: assignedById,
+    assignedByUser: assignedBy,
+    status: CaregiverAssignmentStatus.ACTIVE,
+    carePlanId,
+  });
+
+  return carePlanAssignmentRepo.save(carePlanAssignment);
 };
 
 export const createCarePlan = async (

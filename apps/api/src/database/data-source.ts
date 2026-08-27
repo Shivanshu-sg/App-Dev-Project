@@ -6,11 +6,12 @@ import { PersonalInfo } from "../modules/member/personal-info/personal-info.enti
 import { CarePlan } from "../modules/member/care-plans/care-plans.entity.js";
 import { CarePlanTask } from "../modules/member/care-plan-tasks/care_plan_tasks.entity.js";
 import { CheckIn } from "../modules/member/check-ins/check_in.entity.js";
+import { CaregiverAssignment } from "../modules/member/care-plans/care-giver-assignment.entity.js";
 
 export const appDataSource = new DataSource({
   type: "postgres",
   url: env.DATABASE_URL,
-  entities: [User, PersonalInfo, CarePlan, CarePlanTask, CheckIn],
+  entities: [User, PersonalInfo, CarePlan, CarePlanTask, CheckIn, CaregiverAssignment],
   migrations: ["src/database/migrations/*.ts"],
   synchronize: true,
 });
