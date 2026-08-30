@@ -43,8 +43,8 @@ export function App() {
                 <>
                   <NavLink to="/dashboard/caregiver">Caregiver Dashboard</NavLink>
                   <NavLink to="/caregiver/members">Members</NavLink>
-                  <NavLink to="/check-ins">Check-ins</NavLink>
-                  <NavLink to="/goals">Goals</NavLink>
+                  <NavLink to="/check-ins">Tasks</NavLink>
+                  <NavLink to="/goals">Check Ins</NavLink>
                 </>
               )}
 
