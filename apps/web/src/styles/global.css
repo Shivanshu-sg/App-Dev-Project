@@ -1280,3 +1280,159 @@ header {
     grid-column: 2;
   }
 }
+.members-page {
+  max-width: 1000px;
+}
+
+.members-header {
+  margin-bottom: 1.5rem;
+}
+
+.members-header h1 {
+  margin: 0;
+}
+
+.members-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.members-toolbar {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.members-toolbar label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.members-toolbar input,
+.members-toolbar select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.members-toolbar input:focus,
+.members-toolbar select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.members-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.member-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.member-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.member-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.member-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.member-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.member-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.member-card dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.member-card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.member-card-footer a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  background: #eaf3ee;
+  color: #1c5d3b;
+  font-weight: 700;
+}
+
+.member-card-footer a:hover {
+  background: #dce8df;
+}
+
+.member-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.member-status.on-track {
+  background: #eaf3ee;
+  color: #1c5d3b;
+}
+
+.member-status.needs-attention {
+  background: #fff4df;
+  color: #8a5a00;
+}
+
+@media (min-width: 760px) {
+  .members-toolbar {
+    grid-template-columns: 1fr 240px;
+    align-items: end;
+  }
+
+  .member-card {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  .member-card dl {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .member-card-footer {
+    grid-column: 1 / -1;
+  }
+}

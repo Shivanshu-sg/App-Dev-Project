@@ -42,7 +42,7 @@ export function App() {
               {user.role === "caregiver" && (
                 <>
                   <NavLink to="/dashboard/caregiver">Caregiver Dashboard</NavLink>
-                  <NavLink to="/care-plans">Care plans</NavLink>
+                  <NavLink to="/members">Members</NavLink>
                   <NavLink to="/check-ins">Check-ins</NavLink>
                   <NavLink to="/goals">Goals</NavLink>
                 </>
