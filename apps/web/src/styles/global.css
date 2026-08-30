@@ -1436,3 +1436,163 @@ header {
     grid-column: 1 / -1;
   }
 }
+.member-details-page {
+  max-width: 1000px;
+}
+
+.member-details-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.member-details-header h1 {
+  margin: 0;
+}
+
+.member-details-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.member-stats-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.member-stats-grid article {
+  border: 1px solid #dce8df;
+}
+
+.member-stats-grid span {
+  display: block;
+  color: #52645a;
+  font-size: 0.9rem;
+}
+
+.member-stats-grid strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.6rem;
+}
+
+.member-info-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.member-info-grid article,
+.member-section {
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.member-info-grid h2,
+.member-section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.member-info-grid dl,
+.member-care-plan-card dl,
+.member-check-in-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.member-info-grid dl div,
+.member-care-plan-card dl div,
+.member-check-in-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.member-info-grid dt,
+.member-care-plan-card dt,
+.member-check-in-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.member-info-grid dd,
+.member-care-plan-card dd,
+.member-check-in-card dd {
+  margin: 0;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.member-section {
+  margin-bottom: 1.5rem;
+}
+
+.member-care-plan-list,
+.member-check-in-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.member-care-plan-card,
+.member-check-in-card {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid #e7eee9;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fbfdfb;
+}
+
+.member-care-plan-card h3,
+.member-check-in-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.member-care-plan-card p,
+.member-check-in-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.member-care-plan-card dd,
+.member-check-in-card dd {
+  text-transform: capitalize;
+}
+
+@media (min-width: 760px) {
+  .member-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .member-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .member-info-grid article:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .member-care-plan-card {
+    grid-template-columns: 1.2fr 1.6fr;
+  }
+
+  .member-care-plan-card dl {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .member-check-in-card {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  .member-check-in-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
