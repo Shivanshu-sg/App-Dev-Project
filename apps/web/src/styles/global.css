@@ -1596,3 +1596,174 @@ header {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+.caregiver-tasks-page {
+  max-width: 1100px;
+}
+
+.caregiver-tasks-header {
+  margin-bottom: 1.5rem;
+}
+
+.caregiver-tasks-header h1 {
+  margin: 0;
+}
+
+.caregiver-tasks-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.caregiver-tasks-toolbar {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.caregiver-tasks-toolbar label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.caregiver-tasks-toolbar input,
+.caregiver-tasks-toolbar select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.caregiver-tasks-toolbar input:focus,
+.caregiver-tasks-toolbar select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.caregiver-task-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.caregiver-task-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.caregiver-task-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.caregiver-task-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.caregiver-task-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.caregiver-task-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.caregiver-task-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.caregiver-task-card dd {
+  margin: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+  word-break: break-word;
+}
+
+.caregiver-task-card dd a {
+  color: #1c5d3b;
+}
+
+.caregiver-task-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.task-priority,
+.task-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.priority-low {
+  background: #eaf3ee;
+  color: #1c5d3b;
+}
+
+.priority-med {
+  background: #fff4df;
+  color: #8a5a00;
+}
+
+.priority-high {
+  background: #ffe9e7;
+  color: #b42318;
+}
+
+.task-status-pending {
+  background: #fff4df;
+  color: #8a5a00;
+}
+
+.task-status-done {
+  background: #eaf3ee;
+  color: #1c5d3b;
+}
+
+.task-status-missed {
+  background: #ffe9e7;
+  color: #b42318;
+}
+
+.task-status-skipped {
+  background: #eef2f7;
+  color: #52645a;
+}
+
+@media (min-width: 760px) {
+  .caregiver-tasks-toolbar {
+    grid-template-columns: 1fr 220px 220px;
+    align-items: end;
+  }
+
+  .caregiver-task-card {
+    grid-template-columns: 1fr 1.7fr auto;
+    align-items: start;
+  }
+
+  .caregiver-task-card dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
