@@ -7,9 +7,10 @@ export const caregiverMembersRouter = Router();
 caregiverMembersRouter.use(authenticate);
 caregiverMembersRouter.use(allow('caregiver', 'admin'));
 
-caregiverMembersRouter.get('/', async (_req, res, next) => {
+caregiverMembersRouter.get('', async (req, res, next) => {
   try {
-    const members = await getCaregiverMembers();
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    const members = await getCaregiverMembers(req.user.sub);
     res.json({ data: members });
   } catch (error) {
     next(error);

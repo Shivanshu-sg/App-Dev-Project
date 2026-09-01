@@ -60,12 +60,10 @@ export const generateDueCheckIns = async (userId: string) => {
       carePlan: true,
     },
   });
-  console.log('dueTasks:', dueTasks); // Log the due tasks for debugging
 
   const userDueTasks = dueTasks.filter((task) => {
     return task.carePlan.userId === userId;
   });
-  console.log('userDueTasks:', userDueTasks); // Log the due tasks for debugging
 
   for (const task of userDueTasks) {
     if (!task.nextCheckIn) continue;
@@ -92,6 +90,12 @@ export const generateDueCheckIns = async (userId: string) => {
       });
 
       await checkInRepo.save(checkIn);
+    }
+    else{
+      if (existingCheckIn.status === 'pending' && existingCheckIn.checkInDate < todayStart) {
+        existingCheckIn.status = 'missed';
+        await checkInRepo.save(existingCheckIn);
+      }
     }
 
     task.nextCheckIn = getNextCheckInDate(task.nextCheckIn, task.frequency);

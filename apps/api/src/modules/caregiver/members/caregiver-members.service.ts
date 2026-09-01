@@ -5,26 +5,26 @@ import { CarePlan } from '../../member/care-plans/care-plans.entity.js';
 import { CarePlanTask } from '../../member/care-plan-tasks/care_plan_tasks.entity.js';
 import { CheckIn } from '../../member/check-ins/check_in.entity.js';
 import { AppError } from '../../../lib/errors.js';
+import { CaregiverAssignment } from '../../member/care-plans/care-giver-assignment.entity.js';
 
-export const getCaregiverMembers = async () => {
-  const members = await appDataSource.getRepository(User).find({
-    where: { role: 'member', isActive: true },
-    order: { createdAt: 'DESC' },
+export const getCaregiverMembers = async (userId: string) => {
+  const members = await appDataSource.getRepository(CaregiverAssignment).find({
+    where: { caregiverId: userId },
   });
 
   return Promise.all(
     members.map(async (member) => {
       const personalInfo = await appDataSource
         .getRepository(PersonalInfo)
-        .findOne({ where: { userId: member.id } });
+        .findOne({ where: { userId: member.userId } });
 
       const activeCarePlans = await appDataSource
         .getRepository(CarePlan)
-        .count({ where: { userId: member.id, status: 'active' } });
+        .count({ where: { userId: member.userId, status: 'active' } });
 
       const carePlans = await appDataSource
         .getRepository(CarePlan)
-        .find({ where: { userId: member.id } });
+        .find({ where: { userId: member.userId } });
 
       const carePlanIds = carePlans.map((carePlan) => carePlan.id);
 
@@ -42,15 +42,15 @@ export const getCaregiverMembers = async () => {
         missedCheckIns = await appDataSource
           .getRepository(CheckIn)
           .createQueryBuilder('checkIn')
-          .where('checkIn.user_id = :userId', { userId: member.id })
+          .where('checkIn.user_id = :userId', { userId: member.userId })
           .andWhere('checkIn.status = :status', { status: 'missed' })
           .getCount();
       }
 
       return {
-        id: member.id,
-        email: member.email,
-        role: member.role,
+        id: member.userId,
+        email: member.user.email,
+        role: member.user.role,
         firstName: personalInfo?.firstName ?? null,
         lastName: personalInfo?.lastName ?? null,
         phoneNumber: personalInfo?.phoneNumber ?? null,
