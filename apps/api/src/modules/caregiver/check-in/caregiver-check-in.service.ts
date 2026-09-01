@@ -1,19 +1,31 @@
 import { appDataSource } from '../../../database/data-source.js';
+import { CaregiverAssignment } from '../../member/care-plans/care-giver-assignment.entity.js';
 import { CheckIn } from '../../member/check-ins/check_in.entity.js';
 import { PersonalInfo } from '../../member/personal-info/personal-info.entity.js';
 import { User } from '../../identity/user.entity.js';
 
-export const getCaregiverCheckIns = async () => {
-  const checkIns = await appDataSource.getRepository(CheckIn).find({
-    relations: {
-      carePlan: true,
-      task: true,
-    },
-    order: {
-      checkInDate: 'DESC',
-      createdAt: 'DESC',
-    },
-  });
+export const getCaregiverCheckIns = async (userId: string) => {
+  const assignments = await appDataSource
+    .getRepository(CaregiverAssignment)
+    .find({
+      where: { caregiverId: userId },
+    });
+
+  const memberIds = assignments.map((assignment) => assignment.userId);
+
+  if (memberIds.length === 0) {
+    return [];
+  }
+
+  const checkIns = await appDataSource
+    .getRepository(CheckIn)
+    .createQueryBuilder('checkIn')
+    .leftJoinAndSelect('checkIn.carePlan', 'carePlan')
+    .leftJoinAndSelect('checkIn.task', 'task')
+    .where('checkIn.user_id IN (:...memberIds)', { memberIds })
+    .orderBy('checkIn.check_in_date', 'DESC')
+    .addOrderBy('checkIn.created_at', 'DESC')
+    .getMany();
 
   return Promise.all(
     checkIns.map(async (checkIn) => {

@@ -1,32 +1,39 @@
 import { appDataSource } from '../../../database/data-source.js';
+import { AppError } from '../../../lib/errors.js';
 import { User } from '../../identity/user.entity.js';
 import { PersonalInfo } from '../../member/personal-info/personal-info.entity.js';
 import { CarePlan } from '../../member/care-plans/care-plans.entity.js';
 import { CarePlanTask } from '../../member/care-plan-tasks/care_plan_tasks.entity.js';
 import { CheckIn } from '../../member/check-ins/check_in.entity.js';
-import { AppError } from '../../../lib/errors.js';
 import { CaregiverAssignment } from '../../member/care-plans/care-giver-assignment.entity.js';
 
-export const getCaregiverMembers = async (userId: string) => {
-  const members = await appDataSource.getRepository(CaregiverAssignment).find({
-    where: { caregiverId: userId },
-  });
+export const getCaregiverMembers = async (caregiverId: string) => {
+  const assignments = await appDataSource
+    .getRepository(CaregiverAssignment)
+    .find({
+      where: { caregiverId },
+      relations: {
+        user: true,
+      },
+    });
 
   return Promise.all(
-    members.map(async (member) => {
+    assignments.map(async (assignment) => {
+      const member = assignment.user;
+
       const personalInfo = await appDataSource
         .getRepository(PersonalInfo)
-        .findOne({ where: { userId: member.userId } });
+        .findOne({ where: { userId: assignment.userId } });
 
-      const activeCarePlans = await appDataSource
-        .getRepository(CarePlan)
-        .count({ where: { userId: member.userId, status: 'active' } });
-
-      const carePlans = await appDataSource
-        .getRepository(CarePlan)
-        .find({ where: { userId: member.userId } });
+      const carePlans = await appDataSource.getRepository(CarePlan).find({
+        where: { userId: assignment.userId },
+      });
 
       const carePlanIds = carePlans.map((carePlan) => carePlan.id);
+
+      const activeCarePlans = carePlans.filter(
+        (carePlan) => carePlan.status === 'active',
+      ).length;
 
       let pendingTasks = 0;
       let missedCheckIns = 0;
@@ -42,15 +49,15 @@ export const getCaregiverMembers = async (userId: string) => {
         missedCheckIns = await appDataSource
           .getRepository(CheckIn)
           .createQueryBuilder('checkIn')
-          .where('checkIn.user_id = :userId', { userId: member.userId })
+          .where('checkIn.user_id = :userId', { userId: assignment.userId })
           .andWhere('checkIn.status = :status', { status: 'missed' })
           .getCount();
       }
 
       return {
-        id: member.userId,
-        email: member.user.email,
-        role: member.user.role,
+        id: assignment.userId,
+        email: member?.email ?? null,
+        role: member?.role ?? 'member',
         firstName: personalInfo?.firstName ?? null,
         lastName: personalInfo?.lastName ?? null,
         phoneNumber: personalInfo?.phoneNumber ?? null,
@@ -64,16 +71,31 @@ export const getCaregiverMembers = async (userId: string) => {
   );
 };
 
-export const getCaregiverMemberDetails = async (memberId: string) => {
-  const member = await appDataSource.getRepository(User).findOne({
-    where: {
-      id: memberId,
-      role: 'member',
-      isActive: true,
-    },
-  });
+export const getCaregiverMemberDetails = async (
+  caregiverId: string,
+  memberId: string,
+) => {
+  const assignment = await appDataSource
+    .getRepository(CaregiverAssignment)
+    .findOne({
+      where: {
+        caregiverId,
+        userId: memberId,
+      },
+      relations: {
+        user: true,
+      },
+    });
 
-  if (!member) throw new AppError(404, 'Member not found');
+  if (!assignment || !assignment.user) {
+    throw new AppError(404, 'Member not found');
+  }
+
+  const member = assignment.user;
+
+  if (member.role !== 'member' || !member.isActive) {
+    throw new AppError(404, 'Member not found');
+  }
 
   const personalInfo = await appDataSource
     .getRepository(PersonalInfo)

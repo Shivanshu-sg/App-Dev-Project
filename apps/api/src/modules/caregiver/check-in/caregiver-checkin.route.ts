@@ -7,9 +7,10 @@ export const caregiverCheckInsRouter = Router();
 caregiverCheckInsRouter.use(authenticate);
 caregiverCheckInsRouter.use(allow('caregiver', 'admin'));
 
-caregiverCheckInsRouter.get('/', async (_req, res, next) => {
+caregiverCheckInsRouter.get('/', async (req, res, next) => {
   try {
-    const checkIns = await getCaregiverCheckIns();
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    const checkIns = await getCaregiverCheckIns(req.user.sub);
     res.json({ data: checkIns });
   } catch (error) {
     next(error);

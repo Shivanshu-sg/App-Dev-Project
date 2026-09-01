@@ -62,6 +62,11 @@ export function CareGiverMembers() {
     return matchesSearch && matchesStatus;
   });
 
+  const uniqueFilteredMembers = filteredMembers.filter(
+    (member, index, array) =>
+      array.findIndex((item) => item.id === member.id) === index,
+  );
+
   return (
     <main className="members-page">
       <section className="members-header">
@@ -103,14 +108,13 @@ export function CareGiverMembers() {
           <p>No members found.</p>
         ) : null}
 
-        {filteredMembers.map((member) => {
+        {uniqueFilteredMembers.map((member) => {
           const name =
             `${member.firstName ?? ""} ${member.lastName ?? ""}`.trim() ||
             member.email;
 
           const needsAttention =
-            (member.missedCheckIns ?? 0) > 0 ||
-            (member.pendingTasks ?? 0) > 0;
+            (member.missedCheckIns ?? 0) > 0 || (member.pendingTasks ?? 0) > 0;
 
           return (
             <article className="member-card" key={member.id}>
@@ -152,9 +156,7 @@ export function CareGiverMembers() {
                   {needsAttention ? "Needs attention" : "On track"}
                 </span>
 
-                <Link to={`/caregiver/members/${member.id}`}>
-                  View details
-                </Link>
+                <Link to={`/caregiver/members/${member.id}`}>View details</Link>
               </div>
             </article>
           );
