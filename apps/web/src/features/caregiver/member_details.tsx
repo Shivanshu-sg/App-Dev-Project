@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../lib/api";
+import { CaregiverNotes } from "./notes";
 
 type MemberDetails = {
   id: string;
@@ -104,8 +105,7 @@ export function MemberDetailsPage() {
   }
 
   const fullName =
-    `${member.firstName ?? ""} ${member.lastName ?? ""}`.trim() ||
-    member.email;
+    `${member.firstName ?? ""} ${member.lastName ?? ""}`.trim() || member.email;
 
   return (
     <main className="member-details-page">
@@ -172,7 +172,13 @@ export function MemberDetailsPage() {
             <div>
               <dt>Address</dt>
               <dd>
-                {[member.address, member.city, member.state, member.postalCode, member.country]
+                {[
+                  member.address,
+                  member.city,
+                  member.state,
+                  member.postalCode,
+                  member.country,
+                ]
                   .filter(Boolean)
                   .join(", ") || "Not set"}
               </dd>
@@ -280,9 +286,7 @@ export function MemberDetailsPage() {
       <section className="member-section">
         <h2>Recent check-ins</h2>
 
-        {member.recentCheckIns.length === 0 ? (
-          <p>No check-ins yet.</p>
-        ) : null}
+        {member.recentCheckIns.length === 0 ? <p>No check-ins yet.</p> : null}
 
         <div className="member-check-in-list">
           {member.recentCheckIns.map((checkIn) => (
@@ -307,7 +311,8 @@ export function MemberDetailsPage() {
           ))}
         </div>
       </section>
+
+      <CaregiverNotes memberId={member.id} />
     </main>
   );
 }
-

@@ -2029,3 +2029,134 @@ header {
     align-items: center;
   }
 }
+.caregiver-notes-section {
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.caregiver-notes-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.caregiver-notes-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.caregiver-notes-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.caregiver-notes-header button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  background: #1c5d3b;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.caregiver-notes-header button:hover {
+  background: #164b30;
+}
+
+.caregiver-notes-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.caregiver-note-card {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid #e7eee9;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fbfdfb;
+}
+
+.important-note {
+  border-color: #f2c94c;
+  background: #fffdf2;
+}
+
+.note-category,
+.important-label {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.note-category {
+  background: #eaf3ee;
+  color: #1c5d3b;
+}
+
+.important-label {
+  margin-left: 0.5rem;
+  background: #fff4df;
+  color: #8a5a00;
+}
+
+.caregiver-note-card p {
+  margin: 0;
+  color: #16221d;
+}
+
+.caregiver-note-card small {
+  color: #52645a;
+}
+
+.caregiver-note-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.caregiver-note-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.caregiver-note-form select,
+.caregiver-note-form textarea {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.caregiver-note-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.caregiver-note-form select:focus,
+.caregiver-note-form textarea:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+@media (min-width: 760px) {
+  .caregiver-note-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}

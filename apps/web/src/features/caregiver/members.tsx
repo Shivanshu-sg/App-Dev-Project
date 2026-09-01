@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../lib/api";
+import { CaregiverNotes } from "./notes"
 
 type Member = {
   id: string;
