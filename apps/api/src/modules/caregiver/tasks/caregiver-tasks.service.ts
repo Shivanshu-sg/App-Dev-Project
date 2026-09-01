@@ -1,19 +1,30 @@
 import { appDataSource } from '../../../database/data-source.js';
-import { CarePlan } from '../../member/care-plans/care-plans.entity.js';
+import { CaregiverAssignment } from '../../member/care-plans/care-giver-assignment.entity.js';
 import { CarePlanTask } from '../../member/care-plan-tasks/care_plan_tasks.entity.js';
 import { PersonalInfo } from '../../member/personal-info/personal-info.entity.js';
 import { User } from '../../identity/user.entity.js';
 
-export const getCaregiverTasks = async () => {
-  const tasks = await appDataSource.getRepository(CarePlanTask).find({
-    relations: {
-      carePlan: true,
-    },
-    order: {
-      scheduledTime: 'ASC',
-      createdAt: 'DESC',
-    },
-  });
+export const getCaregiverTasks = async (userId: string) => {
+  const assignments = await appDataSource
+    .getRepository(CaregiverAssignment)
+    .find({
+      where: { caregiverId: userId },
+    });
+
+  const memberIds = assignments.map((assignment) => assignment.userId);
+
+  if (memberIds.length === 0) {
+    return [];
+  }
+
+  const tasks = await appDataSource
+    .getRepository(CarePlanTask)
+    .createQueryBuilder('task')
+    .innerJoinAndSelect('task.carePlan', 'carePlan')
+    .where('carePlan.user_id IN (:...memberIds)', { memberIds })
+    .orderBy('task.scheduled_time', 'ASC')
+    .addOrderBy('task.created_at', 'DESC')
+    .getMany();
 
   return Promise.all(
     tasks.map(async (task) => {

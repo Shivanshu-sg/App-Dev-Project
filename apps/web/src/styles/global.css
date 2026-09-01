@@ -1767,3 +1767,127 @@ header {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+.caregiver-checkins-page {
+  max-width: 1100px;
+}
+
+.caregiver-checkins-header {
+  margin-bottom: 1.5rem;
+}
+
+.caregiver-checkins-header h1 {
+  margin: 0;
+}
+
+.caregiver-checkins-header p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.caregiver-checkins-toolbar {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.caregiver-checkins-toolbar label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.caregiver-checkins-toolbar input,
+.caregiver-checkins-toolbar select {
+  width: 100%;
+  border: 1px solid #c8d8ce;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font: inherit;
+  background: #fff;
+  color: #16221d;
+}
+
+.caregiver-checkins-toolbar input:focus,
+.caregiver-checkins-toolbar select:focus {
+  outline: 2px solid #9ac7ad;
+  border-color: #1c5d3b;
+}
+
+.caregiver-checkin-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.caregiver-checkin-card {
+  display: grid;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #dce8df;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px #16221d18;
+}
+
+.caregiver-checkin-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.caregiver-checkin-card p {
+  margin: 0.35rem 0 0;
+  color: #52645a;
+}
+
+.caregiver-checkin-card dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.caregiver-checkin-card dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.caregiver-checkin-card dt {
+  color: #52645a;
+  font-size: 0.85rem;
+}
+
+.caregiver-checkin-card dd {
+  margin: 0;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.caregiver-checkin-card dd a {
+  color: #1c5d3b;
+}
+
+.caregiver-checkin-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 760px) {
+  .caregiver-checkins-toolbar {
+    grid-template-columns: 1fr 220px 220px;
+    align-items: end;
+  }
+
+  .caregiver-checkin-card {
+    grid-template-columns: 1fr 1.6fr auto;
+    align-items: start;
+  }
+
+  .caregiver-checkin-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

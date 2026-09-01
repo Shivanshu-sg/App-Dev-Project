@@ -50,6 +50,32 @@ type CheckInsResponse = {
   data: CheckIn[];
 };
 
+type MemberProfile = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string | null;
+  gender: string | null;
+  phoneNumber: string | null;
+  emergencyContactName: string | null;
+  emergencyContactPhone: string | null;
+  address: string | null;
+  city: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
+  disabilityType: string | null;
+  mobilityLevel: string | null;
+  wheelchairUser: boolean | null;
+  fatigueTrigger: string | null;
+  medicationRoutine: string | null;
+  workStudySchedule: string | null;
+  accessibilityNeeds: string | null;
+};
+
+type MemberProfileResponse = {
+  data: MemberProfile;
+};
+
 function getStoredUser(): User | null {
   const storedUser = localStorage.getItem("lifely_user");
   return storedUser ? (JSON.parse(storedUser) as User) : null;
@@ -81,6 +107,7 @@ export function MemberDashboard() {
     tasksRemaining: 0,
   });
   const [todayTasks, setTodayTasks] = useState<CareTask[]>([]);
+  const [memberProfile, setMemberProfile] = useState<MemberProfile | null>(null);
   const [mood, setMood] = useState("Good");
   const [energy, setEnergy] = useState("Medium");
   const [isLoading, setIsLoading] = useState(true);
@@ -90,11 +117,12 @@ export function MemberDashboard() {
       setIsLoading(true);
 
       try {
-        const [summaryResult, checkInsResult] = await Promise.all([
+        const [summaryResult, checkInsResult, memberProfile] = await Promise.all([
           api<SummaryResponse>("/dashboard/summary"),
           api<CheckInsResponse>(
             `/member/check-ins/date/${new Date().toISOString().slice(0, 10)}`,
           ),
+          api<MemberProfileResponse >("/member/profile"),
         ]);
 
         setSummary(summaryResult.data);
@@ -106,9 +134,10 @@ export function MemberDashboard() {
             scheduledTime: checkIn.task?.scheduledTime ?? null,
             status: checkIn.status,
             carePlan: checkIn.carePlan,
-            
           })),
         );
+        setMemberProfile(memberProfile.data);
+        console.log("Member profile:", memberProfile.data);
       } catch {
         setTodayTasks([]);
       } finally {
@@ -119,14 +148,16 @@ export function MemberDashboard() {
     loadDashboard();
   }, []);
 
-  const completedTasks = todayTasks.filter((task) => task.status === "done").length;
+  const completedTasks = todayTasks.filter(
+    (task) => task.status === "done",
+  ).length;
 
   return (
     <main className="member-dashboard">
       <section className="dashboard-topbar">
         <div>
           <h1>Lifely AI</h1>
-          <p>Hello, {user?.email?.split("@")[0] ?? "User"}</p>
+          <p>Hello, {memberProfile?.firstName}</p>
         </div>
 
         <div className="dashboard-actions">
@@ -148,7 +179,10 @@ export function MemberDashboard() {
         <div className="wellbeing-row">
           <label>
             Mood
-            <select value={mood} onChange={(event) => setMood(event.target.value)}>
+            <select
+              value={mood}
+              onChange={(event) => setMood(event.target.value)}
+            >
               <option>Good</option>
               <option>Okay</option>
               <option>Low</option>
@@ -181,8 +215,8 @@ export function MemberDashboard() {
         {todayTasks.map((task) => (
           <div className="today-task" key={task.id}>
             <span>[{task.status === "done" ? "x" : " "}]</span>
-            <Link to={`/care-plans/${task.carePlan?.id}`}>{task.title}</Link>
-              <span>{formatTime(task.scheduledTime)}</span>
+            <Link to={"/check-ins"}>{task.title}</Link>
+            <span>{formatTime(task.scheduledTime)}</span>
           </div>
         ))}
 
@@ -200,4 +234,4 @@ export function MemberDashboard() {
       </section> */}
     </main>
   );
-} 
+}

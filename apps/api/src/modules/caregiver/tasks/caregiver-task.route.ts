@@ -7,9 +7,10 @@ export const caregiverTasksRouter = Router();
 caregiverTasksRouter.use(authenticate);
 caregiverTasksRouter.use(allow('caregiver', 'admin'));
 
-caregiverTasksRouter.get('/', async (_req, res, next) => {
+caregiverTasksRouter.get('/', async (req, res, next) => {
   try {
-    const tasks = await getCaregiverTasks();
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    const tasks = await getCaregiverTasks(req.user.sub);
     res.json({ data: tasks });
   } catch (error) {
     next(error);
