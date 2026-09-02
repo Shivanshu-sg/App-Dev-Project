@@ -47,10 +47,18 @@ const getNextCheckInDate = (currentDate: Date, frequency: string | null) => {
 export const generateDueCheckIns = async (userId: string) => {
   const taskRepo = appDataSource.getRepository(CarePlanTask);
   const checkInRepo = appDataSource.getRepository(CheckIn);
-  const carePlanRepo = appDataSource.getRepository(CarePlan);
 
-  const todayStart = startOfToday();
+  const today = startOfToday();
   const todayEnd = endOfToday();
+
+  await checkInRepo
+    .createQueryBuilder()
+    .update(CheckIn)
+    .set({ status: 'missed' })
+    .where('user_id = :userId', { userId })
+    .andWhere('status = :status', { status: 'pending' })
+    .andWhere('check_in_date < :today', { today })
+    .execute();
 
   const dueTasks = await taskRepo.find({
     where: {
@@ -76,32 +84,24 @@ export const generateDueCheckIns = async (userId: string) => {
         checkInDate,
       },
     });
-  
 
-    if (!existingCheckIn) {
-      const checkIn = checkInRepo.create({
-        userId,
-        carePlanId: task.carePlanId,
-        taskId: task.id,
-        checkInDate,
-        status: 'pending',
-        notes: null,
-        completedAt: null,
-      });
+    if (existingCheckIn) continue;
 
-      await checkInRepo.save(checkIn);
-    }
-    else{
-      if (existingCheckIn.status === 'pending' && existingCheckIn.checkInDate < todayStart) {
-        existingCheckIn.status = 'missed';
-        await checkInRepo.save(existingCheckIn);
-      }
-    }
+    const checkIn = checkInRepo.create({
+      userId,
+      carePlanId: task.carePlanId,
+      taskId: task.id,
+      checkInDate,
+      status: 'pending',
+      notes: null,
+      completedAt: null,
+    });
+
+    await checkInRepo.save(checkIn);
 
     task.nextCheckIn = getNextCheckInDate(task.nextCheckIn, task.frequency);
     await taskRepo.save(task);
   }
-
 };
 
 const getOwnedCarePlan = async (userId: string, carePlanId: string) => {

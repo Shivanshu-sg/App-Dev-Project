@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../lib/api";
+import { MemberCaregiverNotes } from "./notes";
 
 type CarePlanStatus = "active" | "paused" | "completed";
 type TaskType = "exercise" | "routine" | "therapy" | "selfcare" | "other";
@@ -491,6 +492,8 @@ export function CarePlanDetails() {
           </section>
         </div>
       ) : null}
+
+      <MemberCaregiverNotes />
     </main>
   );
 }

@@ -21,7 +21,7 @@ const updateCaregiverNoteSchema = caregiverNoteSchema.partial();
 export const caregiverNoteRouter = Router();
 
 caregiverNoteRouter.use(authenticate);
-caregiverNoteRouter.use(allow('caregiver', 'admin', 'member'));
+caregiverNoteRouter.use(allow('caregiver', 'admin'));
 
 caregiverNoteRouter.get('/:memberId/notes', async (req, res, next) => {
   try {

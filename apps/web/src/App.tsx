@@ -34,7 +34,6 @@ export function App() {
                   <NavLink to="/dashboard/member">Dashboard</NavLink>
                   <NavLink to="/care-plans">Care plans</NavLink>
                   <NavLink to="/check-ins">Check-in</NavLink>
-                  <NavLink to="/goals">Goals</NavLink>
                   <NavLink to="/assistant">Assistant</NavLink>
                 </>
               )}
@@ -53,7 +52,6 @@ export function App() {
                   <NavLink to="/dashboard/admin">Admin Dashboard</NavLink>
                   <NavLink to="/care-plans">Care plans</NavLink>
                   <NavLink to="/check-ins">Check-ins</NavLink>
-                  <NavLink to="/goals">Goals</NavLink>
                   <NavLink to="/assistant">Assistant</NavLink>
                 </>
               )}
