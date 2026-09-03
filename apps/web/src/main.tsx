@@ -17,6 +17,7 @@ import { CareGiverMembers } from "./features/caregiver/members";
 import { MemberDetailsPage } from "./features/caregiver/member_details";
 import { CaregiverTasks } from "./features/caregiver/tasks";
 import { CaregiverCheckIns } from "./features/caregiver/checkins";
+import { Assistant } from "./features/member/assistant";
 
 const Placeholder = () => {
   return (
@@ -50,6 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="care-plans" element={<CarePlans />} />
           <Route path="care-plans/:carePlanId" element={<CarePlanDetails />} />
           <Route path="check-ins" element={<CheckIns />} />
+          <Route path="assistant" element={<Assistant />} />
 
 
           <Route path="dashboard/caregiver" element={<CaregiverDashboard />} />
@@ -61,7 +63,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="dashboard/admin" element={<AdminDashboard />} />
 
           <Route path="goals" element={<Placeholder />} />
-          <Route path="assistant" element={<Placeholder />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
