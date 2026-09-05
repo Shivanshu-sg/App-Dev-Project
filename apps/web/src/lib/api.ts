@@ -26,10 +26,10 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export async function registerUser(email: string, password: string, role: Role, name: string, occupation: string, mobileNumber: string): Promise<AuthenticatedUser> {
+export async function registerUser(email: string, password: string, role: Role, name: string, occupation: string, phoneNumber: string): Promise<AuthenticatedUser> {
   const result = await api<AuthResponse>("/auth/register", {
     method: "POST",
-    body: JSON.stringify({ email, password, role, name, occupation, mobileNumber }),
+    body: JSON.stringify({ email, password, role, name, occupation, phoneNumber }),
   });
 
   localStorage.setItem("lifely_access_token", result.data.accessToken);

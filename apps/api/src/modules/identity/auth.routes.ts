@@ -12,7 +12,8 @@ const registration = credentials.extend({
 export const authRouter = Router();
 authRouter.post('/register', async (req, res, next) => {
   try {
-    const { email, password, role, name, occupation, phoneNumber } = registration.parse(req.body);
+    console.log(req.body);
+    const { email, password, role, name, occupation, phoneNumber} = registration.parse(req.body);
     res.status(201).json({ data: await register(email, password, role, name, occupation, phoneNumber  ) });
   } catch (error) { next(error); }
 });

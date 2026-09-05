@@ -25,7 +25,7 @@ export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [occupation, setOccupation] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<Role>("member");
   const [error, setError] = useState("");
@@ -37,7 +37,7 @@ export function RegisterPage() {
     setIsSubmitting(true);
 
     try {
-      const user = await registerUser(email, password, role, name, occupation, mobileNumber);
+      const user = await registerUser(email, password, role, name, occupation, phoneNumber);
 
       if (!user) {
         setError("Registration failed");
@@ -102,11 +102,11 @@ export function RegisterPage() {
 
           {role === "caregiver" && (
             <label>
-              Mobile Number
+              Phone Number
               <input
-                type="telephone"
-                value={mobileNumber}
-                onChange={(event) => setMobileNumber(event.target.value)}
+                type="text"
+                value={phoneNumber}
+                onChange={(event) => setPhoneNumber(event.target.value)}
                 required
                 autoComplete="telephone"
               />

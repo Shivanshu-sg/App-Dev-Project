@@ -50,9 +50,7 @@ export function App() {
               {user.role === "admin" && (
                 <>
                   <NavLink to="/dashboard/admin">Admin Dashboard</NavLink>
-                  <NavLink to="/care-plans">Care plans</NavLink>
-                  <NavLink to="/check-ins">Check-ins</NavLink>
-                  <NavLink to="/assistant">Assistant</NavLink>
+                  <NavLink to="/admin/users">Users</NavLink>
                 </>
               )}
             </div>

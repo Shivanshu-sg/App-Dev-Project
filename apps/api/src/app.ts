@@ -16,6 +16,8 @@ import { caregiverDashboardRouter } from './modules/caregiver/dashboard/caregive
 import { caregiverNoteRouter } from './modules/caregiver/notes/caregiver-notes.route.js';
 import { memberCaregiverNotesRouter } from './modules/member/notes/member-notes.route.js';
 import { assistantRouter } from './modules/member/assistant/assistant.routes.js';
+import { adminDashboardRouter } from './modules/admin/dashboard/admin_dashboard.routes.js';
+import { adminUsersRouter } from './modules/admin/users/admin_users.routes.js';
 
 export const app = express();
 app.use(cors({ origin: env.WEB_ORIGIN }));
@@ -36,5 +38,8 @@ app.use('/api/v1/caregiver/members', caregiverMembersRouter);
 app.use('/api/v1/caregiver/tasks', caregiverTasksRouter);
 app.use('/api/v1/caregiver/check-ins', caregiverCheckInsRouter);
 app.use('/api/v1/caregiver/notes', caregiverNoteRouter);
+
+app.use('/api/v1/admin/dashboard', adminDashboardRouter);
+app.use('/api/v1/admin/users', adminUsersRouter);
 
 app.use(errorHandler);
